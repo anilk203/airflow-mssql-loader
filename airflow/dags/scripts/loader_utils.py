@@ -34,7 +34,7 @@ class LoaderUtils:
         region_name = os.environ.get("BOTO_AWS_REGIION_NAME", "us-east-1")
     
         client = boto3.client(
-            "s3", aws_access_key_id=access_key_id, aws_secret_access_key=secret_access_key
+            "s3", aws_access_key_id=access_key_id, aws_secret_access_key=secret_access_key, region_name=region_name
         )
         return client    
     
