@@ -27,7 +27,11 @@ services:
           - AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION=False
           - AIRFLOW__CORE__MAX_THREADS=-1
           - AIRFLOW__CORE__PARALLELISM=18
-          - AIRFLOW__CORE__DAG_CONCURRENCY=16          
+          - AIRFLOW__CORE__DAG_CONCURRENCY=16 
+          - BOTO_AWS_ACCESS_KEY_ID=${BOTO_AWS_ACCESS_KEY_ID}
+          - BOTO_AWS_SECRET_ACCESS_KEY=${BOTO_AWS_SECRET_ACCESS_KEY}
+          - BOTO_AWS_REGIION_NAME=${BOTO_AWS_REGIION_NAME}
+                   
       logging:
           options:
               max-size: 10m

@@ -33,7 +33,8 @@
 				        fi	
 				        
 				        docker-compose -f docker-compose.yml build 
-				        docker-compose -f docker-compose.yml up -d 
+				        docker-compose -f docker-compose.yml up -d
+				        docker cp /opt/airflow/dags  $CONTAINER_NAME:/usr/local/airflow/dags
                 &apos;&apos;&apos;
                 sleep(time:15,unit:&quot;SECONDS&quot;)
                 
