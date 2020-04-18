@@ -32,8 +32,8 @@
   					        docker stop $CONTAINER_FOUND &amp;&amp; docker rm $CONTAINER_FOUND
 				        fi	
 				        
-				        docker-compose build 
-				        docker-compose up -d 
+				        docker-compose -f docker-compose.yml build 
+				        docker-compose -f docker-compose.yml up -d 
                 &apos;&apos;&apos;
                 sleep(time:15,unit:&quot;SECONDS&quot;)
                 
