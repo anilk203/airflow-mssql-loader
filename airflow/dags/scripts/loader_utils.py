@@ -24,9 +24,12 @@ class LoaderUtils:
         return connection    
     
     def get_s3_client(self):
-        access_key_id = os.environ.get("BOTO_AWS_ACCESS_KEY_ID", "")
+        print("get_s3_client()")
+        print("BOTO_AWS_ACCESS_KEY_ID: ",os.environ.get("BOTO_AWS_ACCESS_KEY_ID", None))
+        print("BOTO_AWS_SECRET_ACCESS_KEY: ",os.environ.get("BOTO_AWS_SECRET_ACCESS_KEY", None))
+        access_key_id = os.environ.get("BOTO_AWS_ACCESS_KEY_ID", None)
         secret_access_key = os.environ.get(
-            "BOTO_AWS_SECRET_ACCESS_KEY", ""
+            "BOTO_AWS_SECRET_ACCESS_KEY", None
         )
         region_name = os.environ.get("BOTO_AWS_REGIION_NAME", "us-east-1")
     
