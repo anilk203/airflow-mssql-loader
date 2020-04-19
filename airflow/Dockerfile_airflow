@@ -29,7 +29,7 @@ RUN  apt-get install unixodbc-dev  -y
 # optional: kerberos library for debian-slim distributions
 RUN  apt-get install libgssapi-krb5-2  -y
 
-
+RUN apt-get install vim -y
 
 RUN pip install pyodbc
 
