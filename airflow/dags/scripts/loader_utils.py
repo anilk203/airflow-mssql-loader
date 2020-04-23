@@ -57,7 +57,7 @@ class LoaderUtils:
         print("Uploading file [{0}] to S3".format(file_to_upload))
         client = self.get_s3_client()
         data = open(file_to_upload, 'rb') 
-        client.put_object(Bucket="mssqlloader1", Key=('uploaded/' + working_dir + '/' + file_name), Body=data)                              
+        client.put_object(Bucket="mssqlloader", Key=('uploaded/' + working_dir + '/' + file_name), Body=data)                              
          
     def load_file1(self, file):  
         print("load_file1: file [{0}]".format(file))
@@ -105,7 +105,7 @@ class LoaderUtils:
         print("Downloading file  [{0}] and file path is [{1}]".format(file_name, file_path))
         client = self.get_s3_client()
         client.download_file(
-            "mssqlloader1", "source/" + file_name, file_path
+            "mssqlloader", "source/" + file_name, file_path
         ) 
         return file_path 
     
@@ -119,7 +119,7 @@ class LoaderUtils:
         
         client = self.get_s3_client()
         client.download_file(
-            "mssqlloader1", "source/" + file_name, file_path
+            "mssqlloader", "source/" + file_name, file_path
         ) 
         
         if file_size == self.check_file_size(file_name, file_path):
