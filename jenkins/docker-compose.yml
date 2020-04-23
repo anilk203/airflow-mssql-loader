@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-        - '8080:8080'
+        - '80:8080'
     volumes:
         - ../airflow:/opt/airflow
         - ./jenkins_home:/var/jenkins_home
