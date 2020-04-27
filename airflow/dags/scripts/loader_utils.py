@@ -16,27 +16,17 @@ from airflow.exceptions import AirflowException
 class LoaderUtils: 
 
     def get_connection(self):
-        server = 'tcp:mssql_database'
-        database = 'loaderdb'
-        username = 'sa'
-        password = '4HLgdrkntTpg'
-        connection = pyodbc.connect('DRIVER={/opt/microsoft/msodbcsql17/lib64/libmsodbcsql-17.5.so.2.1};SERVER=' + server + ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password)
+        server = os.environ.get("MSSQL_HOST", None)
+        database = os.environ.get("MSSQL_DATABASE", None)
+        username = os.environ.get("MSSQL_USERNAME", None)
+        password = os.environ.get("MSSQL_PASSWORD", None)
+        connection = pyodbc.connect('MSSQL_DRIVER='+os.environ.get("MSSQL_DRIVER", None) +';SERVER=' + server + ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password)
         return connection    
     
     def get_s3_client(self):
-        print("get_s3_client()")
-        print("BOTO_AWS_ACCESS_KEY_ID: ",os.environ.get("BOTO_AWS_ACCESS_KEY_ID", None))
-        print("BOTO_AWS_SECRET_ACCESS_KEY: ",os.environ.get("BOTO_AWS_SECRET_ACCESS_KEY", None))
-        access_key_id = os.environ.get("BOTO_AWS_ACCESS_KEY_ID", None)
-        secret_access_key = os.environ.get(
-            "BOTO_AWS_SECRET_ACCESS_KEY", None
-        )
-        region_name = os.environ.get("BOTO_AWS_REGIION_NAME", "us-east-1")
-    
-        client = boto3.client(
-            "s3", aws_access_key_id=access_key_id, aws_secret_access_key=secret_access_key, region_name=region_name
-        )
-        return client    
+        return boto3.client(
+            "s3", aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID", None), aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY", None), region_name=os.environ.get("AWS_REGION_NAME", "us-east-1")
+        )    
     
     def build_file1(self, file_name, file_path):
         print("Reading data from file1 table and building csv file [{0}] and file location [{1}]".format(file_name, file_path))
@@ -57,7 +47,7 @@ class LoaderUtils:
         print("Uploading file [{0}] to S3".format(file_to_upload))
         client = self.get_s3_client()
         data = open(file_to_upload, 'rb') 
-        client.put_object(Bucket="mssqlloader", Key=('uploaded/' + working_dir + '/' + file_name), Body=data)                              
+        client.put_object(Bucket=os.environ.get("AWS_S3_BUCKET", None), Key=('outbound/' + working_dir + '/' + file_name), Body=data)                              
          
     def load_file1(self, file):  
         print("load_file1: file [{0}]".format(file))
@@ -105,7 +95,7 @@ class LoaderUtils:
         print("Downloading file  [{0}] and file path is [{1}]".format(file_name, file_path))
         client = self.get_s3_client()
         client.download_file(
-            "mssqlloader", "source/" + file_name, file_path
+            os.environ.get("AWS_S3_BUCKET", None), "inbound/" + file_name, file_path
         ) 
         return file_path 
     
@@ -119,7 +109,7 @@ class LoaderUtils:
         
         client = self.get_s3_client()
         client.download_file(
-            "mssqlloader", "source/" + file_name, file_path
+            os.environ.get("AWS_S3_BUCKET", None), "inbound/" + file_name, file_path
         ) 
         
         if file_size == self.check_file_size(file_name, file_path):
