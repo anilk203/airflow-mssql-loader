@@ -4,7 +4,7 @@ echo "Remove all containers"
 docker  ps -as
 
 docker stop airflow
-dokcer rm airflow
+docker rm airflow
 
 docker stop postgres
 docker rm postgres
