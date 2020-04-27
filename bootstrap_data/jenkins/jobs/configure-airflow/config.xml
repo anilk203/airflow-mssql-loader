@@ -73,7 +73,7 @@
                 dir(&apos;/opt/airflow&apos;) {  
                     sh &quot;ls  -latr&quot; 
                     writeFile file: &quot;airflow.env&quot;, text: &quot;&quot;&quot;STACK_NAME=airflow\nAWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}\nAWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}\nAWS_REGION_NAME=${AWS_REGION_NAME}\nAWS_S3_BUCKET=${AWS_S3_BUCKET}\nMSSQL_DRIVER=${MSSQL_DRIVER}\nMSSQL_HOST=${MSSQL_HOST}\nMSSQL_DATABASE=${MSSQL_DATABASE}\nMSSQL_USERNAME=${MSSQL_USERNAME}\nMSSQL_PASSWORD=${MSSQL_PASSWORD}\n&quot;&quot;&quot;
-                    writeFile file: &quot;.env&quot;, text: &quot;&quot;&quot;STACK_NAME=airflow\nAWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}\nAWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}\nAWS_REGION_NAME=${AWS_REGION_NAME}\nAWS_S3_BUCKET=${AWS_S3_BUCKET}\nMSSQL_DRIVER=${MSSQL_DRIVER}\nMSSQL_HOST=${MSSQL_HOST}\nMSSQL_DATABASE=${MSSQL_DATABASE}\nMSSQL_USERNAME=${MSSQL_USERNAME}\nMSSQL_PASSWORD=${MSSQL_PASSWORD}\n&quot;&quot;&quot;
+                    writeFile file: &quot;.env&quot;, text: &quot;&quot;&quot;STACK_NAME=airflow\nENV_FILE=airflow.env\nAWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}\nAWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}\nAWS_REGION_NAME=${AWS_REGION_NAME}\nAWS_S3_BUCKET=${AWS_S3_BUCKET}\nMSSQL_DRIVER=${MSSQL_DRIVER}\nMSSQL_HOST=${MSSQL_HOST}\nMSSQL_DATABASE=${MSSQL_DATABASE}\nMSSQL_USERNAME=${MSSQL_USERNAME}\nMSSQL_PASSWORD=${MSSQL_PASSWORD}\n&quot;&quot;&quot;
              } 
         } 
     }  

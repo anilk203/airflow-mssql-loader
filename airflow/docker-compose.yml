@@ -37,6 +37,8 @@ services:
           #- ./dags:/usr/local/airflow/dags 
       ports:
           - "8081:8080"
+      env_file:
+        - ${ENV_FILE}          
       command: webserver
       healthcheck:
           test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
