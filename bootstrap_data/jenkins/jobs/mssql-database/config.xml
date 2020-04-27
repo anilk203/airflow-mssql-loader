@@ -33,7 +33,6 @@
         	 sh &apos;&apos;&apos;  
         	    CONTAINER_NAME=&quot;mssql_database&quot;
         	    docker exec $CONTAINER_NAME  bash -c &quot;ln -sfn /opt/mssql-tools/bin/sqlcmd /usr/bin/sqlcmd&quot;
-				docker exec mssql_database bash -c &apos;sqlcmd -U sa -P 4HLgdrkntTpg &quot;-Q drop database IF EXISTS loaderdb;create database loaderdb&quot;&apos;
 				docker inspect -f &apos;{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}&apos; $CONTAINER_NAME
 			&apos;&apos;&apos;      
         }  
