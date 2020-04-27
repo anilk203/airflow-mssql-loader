@@ -20,7 +20,7 @@ class LoaderUtils:
         database = os.environ.get("MSSQL_DATABASE", None)
         username = os.environ.get("MSSQL_USERNAME", None)
         password = os.environ.get("MSSQL_PASSWORD", None)
-        connection = pyodbc.connect('MSSQL_DRIVER='+os.environ.get("MSSQL_DRIVER", None) +';SERVER=' + server + ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password)
+        connection = pyodbc.connect('DRIVER='+os.environ.get("MSSQL_DRIVER", None) +';SERVER=' + server + ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password)
         return connection    
     
     def get_s3_client(self):
