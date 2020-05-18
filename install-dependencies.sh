@@ -27,7 +27,7 @@ docker-compose down && docker-compose build && docker-compose up -d && sleep 10 
 docker stop jenkins
 pwd
 ls -altr
-cd /opt/airflow-mssql-loader/bootstrap_data/jenkins/
-cp -R /opt/airflow-mssql-loader/bootstrap_data/jenkins/jobs/ /opt/airflow-mssql-loader/jenkins/jenkins_home/
-cp /opt/airflow-mssql-loader/bootstrap_data/jenkins/config.xml /opt/airflow-mssql-loader/jenkins/jenkins_home/
+cd ../bootstrap_data/jenkins/
+cp -R ./jobs/ ../jenkins/jenkins_home/
+cp ./config.xml ../../jenkins/jenkins_home/
 docker start jenkins
